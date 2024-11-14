@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face and Mood Detection Result</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Processed Image with Faces and Mood Detection</h1>
+
+        <!-- Display the uploaded image with detected faces -->
+        <h2>Processed Image with Faces</h2>
+        <img src="{{ url_for('static', filename='uploads/' + image_filename) }}" alt="Processed Image" class="img-fluid">
+        
+        <hr>
+        
+        <h2>Detected Faces and Mood</h2>
+        <ul class="list-group">
+            {% for face in mood_data %}
+                <li class="list-group-item">
+                    <strong>Face Coordinates:</strong> {{ face.coordinates }}<br>
+                    <strong>Mood:</strong> {{ face.mood }}<br>
+                    <strong>Age:</strong> {{ face.age }}<br>
+                    <strong>Gender:</strong> {{ face.gender }}<br>
+                    <strong>Race:</strong> {{ face.race }}<br>
+                    <strong>Emotion Confidences:</strong>
+                    <ul>
+                        {% for emotion, confidence in face.emotion_confidences.items() %}
+                            <li>{{ emotion }}: {{ confidence }}%</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <hr>
+
+        <!-- Button to go back to the home page -->
+        <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Go Back</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
