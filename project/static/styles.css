@@ -1,0 +1,27 @@
+body {
+    background-color: #f8f9fa;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+h1, h2, h3 {
+    color: #007bff;
+}
+
+.container {
+    max-width: 600px;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+}
+
+.list-group-item {
+    text-align: left;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}

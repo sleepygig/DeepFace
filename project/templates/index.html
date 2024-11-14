@@ -4,12 +4,176 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Image</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Color Variables */
+        :root {
+            --rich-black: #020B1Aff;
+            --silver: #BFC6C6ff;
+            --white: #FFFFFFff;
+            --white-2: #FEFEFEff;
+            --bittersweet-shimmer: #C24A48ff;
+        }
+
+        /* Body styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: black;
+            color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background texture */
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        /* Container styling */
+        .container {
+            background-color: var(--white-2);
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            transform: scale(1);
+            transition: transform 0.3s ease;
+        }
+        .container:hover {
+            transform: scale(1.03);
+        }
+
+        /* Heading styling */
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--rich-black);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Heading underline effect */
+        h1::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--bittersweet-shimmer);
+            left: 0;
+            bottom: -5px;
+        }
+
+        /* Form styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* File input styling */
+        input[type="file"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid var(--silver);
+            border-radius: 8px;
+            background-color: var(--white);
+            color: var(--rich-black);
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="file"]:hover {
+            border-color: var(--bittersweet-shimmer);
+        }
+
+        /* Button styling */
+        button {
+            padding: 12px 25px;
+            background-color: var(--bittersweet-shimmer);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        button:hover {
+            background-color: #a83c3a;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+
+        img{
+            width: 500px;
+        }
+
+
+        .wrapper{
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            button {
+                font-size: 14px;
+            }
+
+
+           
+        }
+    </style>
 </head>
 <body>
-    <h1>Upload an Image for Face Detection and Mood Analysis</h1>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="image" accept="image/*" required>
-        <button type="submit">Upload</button>
-    </form>
+  <div class = "wrapper">
+
+    <div class="container">
+        <img src="{{ url_for('static', filename='uploads/logo.jpg') }}" alt="Processed Image" class="logo_img">
+
+        <h1>Upload an Image for Face Detection and Mood Analysis</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*" required>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+  </div>
 </body>
 </html>

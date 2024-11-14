@@ -5,17 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Face and Mood Detection Result</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body{
+            background-color: black;
+            color: white;
+            text-align: center;
+
+        }
+        .container{
+            display: flex;
+            align-items: center;
+        }
+        .list-group{
+            color: black;
+            transition: transform 0.3s ease;
+
+        }
+
+        
+        .list-group:hover{
+            transform: scale(1.03);
+
+        }
+
+        .btn{
+            background-color: red;
+        }
+
+        .footer{
+            display: flex;
+            justify-content: flex-end;
+        }
+        .image_div{
+            text-align: center;
+        }
+
+        .img{
+            height: 500px;
+        }
+
+        .left{
+            margin-right: 20px;
+        }
+
+    </style>
 </head>
 <body>
     <div class="container mt-5">
-        <h1>Processed Image with Faces and Mood Detection</h1>
+       <div class="left">
+        <h2 class="header">Processed Image with Faces and Mood Detection</h2>
 
         <!-- Display the uploaded image with detected faces -->
-        <h2>Processed Image with Faces</h2>
-        <img src="{{ url_for('static', filename='uploads/' + image_filename) }}" alt="Processed Image" class="img-fluid">
+       
+       <div class="image_div">
+        <img src="{{ url_for('static', filename='uploads/' + image_filename) }}" alt="Processed Image" class="img-fluid img">
+       </div>
+       </div>
         
-        <hr>
-        
+        <div>
         <h2>Detected Faces and Mood</h2>
         <ul class="list-group">
             {% for face in mood_data %}
@@ -23,14 +70,13 @@
                     <strong>Face Coordinates:</strong> {{ face.coordinates }}<br>
                     <strong>Mood:</strong> {{ face.mood }}<br>
                     <strong>Age:</strong> {{ face.age }}<br>
-                    <strong>Gender:</strong> {{ face.gender }}<br>
+                    <strong>Gender:</strong> 
+                    {% if face.gender['Man'] > face.gender['Woman'] %}
+                        Man
+                    {% else %}
+                        Woman
+                    {% endif %}<br>
                     <strong>Race:</strong> {{ face.race }}<br>
-                    <strong>Emotion Confidences:</strong>
-                    <ul>
-                        {% for emotion, confidence in face.emotion_confidences.items() %}
-                            <li>{{ emotion }}: {{ confidence }}%</li>
-                        {% endfor %}
-                    </ul>
                 </li>
             {% endfor %}
         </ul>
@@ -38,9 +84,12 @@
         <hr>
 
         <!-- Button to go back to the home page -->
-        <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Go Back</a>
-    </div>
+      <div class="footer">
+         <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Go Back</a>
+      </div>
 
+    </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -43,7 +43,6 @@ def detect_faces_and_mood(image_path):
     mood_data = []
     if isinstance(analysis_results, dict):
         analysis_results = [analysis_results]
-        type(analysis_results)
 
     for face_analysis in analysis_results:
         x, y, w, h = face_analysis['region']['x'], face_analysis['region']['y'], face_analysis['region']['w'], face_analysis['region']['h']
@@ -70,9 +69,6 @@ def detect_faces_and_mood(image_path):
     cv2.imwrite(result_path, img)
     return result_filename, mood_data
 
-
-
-#End Points
 @app.route('/')
 def index():
     return render_template('index.html')
